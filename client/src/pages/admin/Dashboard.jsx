@@ -31,8 +31,23 @@ const Dashboard = () => {
           </div>
         </div>
 
+        <div className="flex items-center gap-4 bg-white p-4 min-w-58 rounded shadow cursor-pointer hover:scale-105 transition-all">
+          <img src={assets.dashboard_icon_2} alt="" />
+          <div>
+            <p className="text-xl">{dashboardData.comments}</p>
+            <p className="text-gray-400 font-light">Comments</p>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-4 bg-white p-4 min-w-58 rounded shadow cursor-pointer hover:scale-105 transition-all">
+          <img src={assets.dashboard_icon_3} alt="" />
+          <div>
+            <p className="text-xl">{dashboardData.drafts}</p>
+            <p className="text-gray-400 font-light">Drafts</p>
+          </div>
+        </div>
       </div>
-      
+
     </div>
   )
 }
