@@ -23,6 +23,9 @@ const AddBlog = () => {
           <input onChange={(e) => setImage(e.target.files[0])} type="file" id='image' hidden required />
         </label>
 
+        <p className="mt-4">Blog title</p>
+        <input type="text" placeholder='Type here' required className='w-full max-w-lg mt-2 p-2 border border-gray-300 outline-none rounded' onChange={e => setTitle(e.target.value)} value={title} />
+
       </div>
     </form>
   )
