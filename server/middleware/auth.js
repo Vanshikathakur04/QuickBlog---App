@@ -10,3 +10,5 @@ const auth = (res, req, next) => {
     res.json({success: false, message: "Inavalid token"})
   }
 }
+
+export default auth;
