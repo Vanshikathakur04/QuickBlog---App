@@ -41,7 +41,7 @@ export const addBlog = async (req, res) => {
 
 export const getAllBlogs = async (req, res) => {
   try {
-    const blogs = await Blog.find({isPublished: true})
+    const blogs = await Blog.find({ isPublished: true })
     res.json({ success: true, blogs })
   } catch (error) {
     res.json({ success: false, message: error.message })
@@ -86,9 +86,20 @@ export const tooglePublish = async (req, res) => {
 export const addComment = async (req, res) => {
   try {
     const { blog, name, content } = req.body;
-    await Comment.create({blog,name,content});
-    res.json({ success: true, message: "Comment added for review" }) 
+    await Comment.create({ blog, name, content });
+    res.json({ success: true, message: "Comment added for review" })
   } catch (error) {
-    res.json({ success: false, message: error.message })   
+    res.json({ success: false, message: error.message })
   }
 }
+
+export const getBlogComments = async (params) => {
+  try {
+    const { blogId } = req.body;
+    const comments = (await Comment.find({ blog: blogId, isApproved: true })).sort({ createdAt: -1 });
+    res.json({ success: true, comments })
+  } catch (error) {
+    res.json({ success: false, message: error.message })
+  }
+}
+
