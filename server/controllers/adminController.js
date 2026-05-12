@@ -1,4 +1,6 @@
 import jwt from 'jsonwebtoken'
+import Blog from '../models/Blog.js';
+import Comment from '../models/Comment.js';
 
 export const adminLogin = async (req, res) => {
   try {
@@ -10,6 +12,24 @@ export const adminLogin = async (req, res) => {
 
     const token = jwt.sign({ email }, process.env.JWT_SECRET)
     res.json({ success: true, token })
+  } catch (error) {
+    res.json({ success: false, message: error.message })
+  }
+}
+
+export const getAllBlogsAdmin = async (req, res) => {
+  try {
+    const blogs = await Blog.find({}).sort({ createdAt: -1 });
+    res.json({ success: true, blogs })
+  } catch (error) {
+    res.json({ success: false, message: error.message })
+  }
+}
+
+export const getAllComments = async (req, res) => {
+  try {
+    const comments = await Comment.find({}).populate("blog").sort({ createdAt: -1 });
+    res.json({ success: true, comments })
   } catch (error) {
     res.json({ success: false, message: error.message })
   }
