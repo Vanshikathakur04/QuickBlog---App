@@ -30,6 +30,10 @@ export const AppProvider = ({ children }) => {
   }
 }, [token])
 
+useEffect(() => {
+  fetchBlogs()
+}, [])
+
 
   const value = {
     axios, navigate, token, setToken, blogs, setBlogs, input, setInput
