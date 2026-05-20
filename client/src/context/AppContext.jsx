@@ -11,7 +11,7 @@ export const AppProvider = ({ children }) => {
 
   const navigate = useNavigate()
 
-  const [token, setToken] = useState(null)
+  const [token, setToken] = useState(localStorage.getItem("token") || null)
   const [blogs, setBlogs] = useState([])
   const [input, setInput] = useState("")
 
@@ -25,15 +25,18 @@ export const AppProvider = ({ children }) => {
   }
 
   useEffect(() => {
-  if (token) {
-    axios.defaults.headers.common['Authorization'] = token
-  }
-}, [token])
+    if (token) {
+      axios.defaults.headers.common['Authorization'] = token
+      localStorage.setItem("token", token)
+    } else {
+      delete axios.defaults.headers.common['Authorization']
+      localStorage.removeItem("token")
+    }
+  }, [token])
 
-useEffect(() => {
-  fetchBlogs()
-}, [])
-
+  useEffect(() => {
+    fetchBlogs()
+  }, [])
 
   const value = {
     axios, navigate, token, setToken, blogs, setBlogs, input, setInput
