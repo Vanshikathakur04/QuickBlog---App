@@ -13,7 +13,7 @@ const Dashboard = () => {
     recentBlogs: []
   })
 
-  const { axios } = useAppContext()
+  const { axios } = useAppContext();
 
   const fetchDashboard = async () => {
     try {
